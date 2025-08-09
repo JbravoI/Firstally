@@ -9,7 +9,7 @@ on:
 env:
   RESOURCE_GROUP: my-resource-group
   LOCATION: eastus
-  TEMPLATE_FILE: ./main.bicep
+  TEMPLATE_FILE: ./firstally_IAC/template.bicep
   DEPLOYMENT_NAME: github-bicep-deployment
 
 jobs:
@@ -22,9 +22,9 @@ jobs:
 
       # 2. Log in to Azure using service principal
       - name: Azure Login
-        uses: azure/login@v2
-        with:
-          creds: ${{ secrets.AZURE_CREDENTIALS }}
+        run: |
+          az login --service-principal --username ${{ secrets.username }} --password ${{ secrets.password }} --tenant ${{ secrets.tenant }}
+
 
       # # 3. Deploy Bicep template
       # - name: Deploy Bicep template
