@@ -27,6 +27,12 @@ jobs:
           az account set --subscription 'f0f3efc1-4c67-445e-a1cf-227201723279'
 
 
+
+      # # 3. Deploy Bicep template
+      - name: Deploy Bicep template
+        run: |
+            az deployment tenant $(secrets.tenant) --location $(eastus2) --template-file $(env.TEMPLATE_FILE)
+
       # # 3. Deploy Bicep template
       # - name: Deploy Bicep template
       #   uses: azure/arm-deploy@v2
