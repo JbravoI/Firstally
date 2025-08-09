@@ -40,19 +40,8 @@ jobs:
       # # 4. Deploy Bicep template
       - name: Deploy Bicep template
         run: |
-            az deployment tenant $(secrets.tenant) --location $(eastus2) --template-file $(env.TEMPLATE_FILE)
+            az deployment tenant $(secrets.tenant) --location $(eastus2) --template-file './firstally_IAC/template.bicep'
 
-      # # 3. Deploy Bicep template
-      # - name: Deploy Bicep template
-      #   uses: azure/arm-deploy@v2
-      #   with:
-      #     scope: resourcegroup
-      #     subscriptionId: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
-      #     resourceGroupName: ${{ env.RESOURCE_GROUP }}
-      #     template: ${{ env.TEMPLATE_FILE }}
-      #     deploymentName: ${{ env.DEPLOYMENT_NAME }}
-      #     parameters: |
-      #       location=${{ env.LOCATION }}
 
       # 4. Logout from Azure
       - name: Azure Logout
