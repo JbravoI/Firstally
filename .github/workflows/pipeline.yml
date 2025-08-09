@@ -40,7 +40,9 @@ jobs:
       # # 4. Deploy Bicep template
       - name: Deploy Bicep template
         run: |
-            az deployment tenant $(secrets.tenant) --location $(eastus2) --template-file './firstally_IAC/template.bicep'
+            pwd
+            ls
+            az deployment tenant $(secrets.tenant)  --template-file './firstally_IAC/template.bicep'
 
 
       # 4. Logout from Azure
