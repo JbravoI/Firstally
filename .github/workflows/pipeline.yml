@@ -67,9 +67,10 @@ jobs:
       - name: Deploy built ARM template
         run: |
           az deployment tenant create \
-            --resource-group ${{ env.RESOURCE_GROUP }} \
+            --name 'DEPLOYMENT_BICEP' \
+            --location 'eastus2' \
             --template-file ./deploy/template.json \
-            --parameters --location 'eastus2' subscriptionId=${{ secrets.subscription_id }} \
+            --parameters subscriptionId=${{ secrets.subscription_id }} \
 
       - name: Azure Logout
         run: az logout
