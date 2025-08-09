@@ -1,5 +1,5 @@
 // Set the scope to the subscription
-targetScope = 'tenant'
+targetScope = 'subscription'
 
 param subscriptionId string
 param environmentName string = 'dev'
