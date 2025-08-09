@@ -32,7 +32,9 @@ jobs:
       # # 3. Build Bicep template
       - name: Build Bicep template
         run: |
-            az bicep build --file $(env.TEMPLATE_FILE)
+            pwd
+            ls
+            az bicep build --file $(env.TEMPLATE_FILE) --stdout
 
 
       # # 4. Deploy Bicep template
