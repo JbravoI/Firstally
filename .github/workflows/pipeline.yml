@@ -24,6 +24,7 @@ jobs:
       - name: Azure Login
         run: |
           az login --service-principal --username ${{ secrets.username }} --password ${{ secrets.password }} --tenant ${{ secrets.tenant }}
+          az account set --subscription 
 
 
       # # 3. Deploy Bicep template
