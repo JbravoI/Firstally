@@ -69,7 +69,7 @@ jobs:
           az deployment tenant create \
             --resource-group ${{ env.RESOURCE_GROUP }} \
             --template-file ./deploy/template.json \
-            --parameters subscriptionId=${{ secrets.subscription_id }} \
+            --parameters --location 'eastus2' subscriptionId=${{ secrets.subscription_id }} \
 
       - name: Azure Logout
         run: az logout
