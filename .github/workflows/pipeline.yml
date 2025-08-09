@@ -28,7 +28,14 @@ jobs:
 
 
 
-      # # 3. Deploy Bicep template
+
+      # # 3. Build Bicep template
+      - name: Build Bicep template
+        run: |
+            az bicep build --file $(env.TEMPLATE_FILE)
+
+
+      # # 4. Deploy Bicep template
       - name: Deploy Bicep template
         run: |
             az deployment tenant $(secrets.tenant) --location $(eastus2) --template-file $(env.TEMPLATE_FILE)
