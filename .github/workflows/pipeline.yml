@@ -1,10 +1,10 @@
 name: Deploy Bicep to Azure
 
 on:
-  workflow_dispatch: # Manual trigger
+  workflow_dispatch:
   push:
     branches:
-      - main # Trigger on pushes to main branch
+      - main
 
 env:
   RESOURCE_GROUP: my-resource-group
@@ -13,38 +13,63 @@ env:
   DEPLOYMENT_NAME: github-bicep-deployment
 
 jobs:
-  deploy:
+  build:
     runs-on: ubuntu-latest
+    outputs:
+      built_file: ${{ steps.build_bicep.outputs.filepath }}
     steps:
-      # 1. Checkout repository
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      # 2. Log in to Azure using service principal
       - name: Azure Login
         run: |
-          az login --service-principal --username ${{ secrets.username }} --password ${{ secrets.password }} --tenant ${{ secrets.tenant }}
+          az login --service-principal \
+            --username ${{ secrets.username }} \
+            --password ${{ secrets.password }} \
+            --tenant ${{ secrets.tenant }}
           az account set --subscription 'f0f3efc1-4c67-445e-a1cf-227201723279'
 
-
-
-
-      # # 3. Build Bicep template
       - name: Build Bicep template
+        id: build_bicep
         run: |
-            pwd
-            ls
-            az bicep build --file './firstally_IAC/template.bicep' --stdout
+          mkdir -p build
+          OUTPUT_FILE="build/template.json"
+          az bicep build --file "${{ env.TEMPLATE_FILE }}" --outdir build
+          echo "filepath=$OUTPUT_FILE" >> $GITHUB_OUTPUT
 
+      - name: Upload build artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: bicep-output
+          path: build/template.json
 
-      # # 4. Deploy Bicep template
-      - name: Deploy Bicep template
+  deploy:
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Download build artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: bicep-output
+          path: ./deploy
+
+      - name: Azure Login
         run: |
-            pwd
-            ls
-            az deployment tenant 'create'  --template-file ./firstally_IAC/template.bicep
+          az login --service-principal \
+            --username ${{ secrets.username }} \
+            --password ${{ secrets.password }} \
+            --tenant ${{ secrets.tenant }}
+          az account set --subscription 'f0f3efc1-4c67-445e-a1cf-227201723279'
 
+      - name: Deploy built ARM template
+        run: |
+          az deployment group create \
+            --resource-group ${{ env.RESOURCE_GROUP }} \
+            --template-file ./deploy/template.json \
+            --parameters location=${{ env.LOCATION }}
 
-      # 4. Logout from Azure
       - name: Azure Logout
         run: az logout
