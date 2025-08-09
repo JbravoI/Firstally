@@ -27,7 +27,7 @@ jobs:
             --username ${{ secrets.username }} \
             --password ${{ secrets.password }} \
             --tenant ${{ secrets.tenant }}
-          az account set --subscription 'f0f3efc1-4c67-445e-a1cf-227201723279'
+          az account set --subscription ${{ secrets.subscription_id }}
 
       - name: Build Bicep template
         id: build_bicep
@@ -62,14 +62,16 @@ jobs:
             --username ${{ secrets.username }} \
             --password ${{ secrets.password }} \
             --tenant ${{ secrets.tenant }}
-          az account set --subscription 'f0f3efc1-4c67-445e-a1cf-227201723279'
+          az account set --subscription ${{ secrets.subscription_id }}
 
       - name: Deploy built ARM template
         run: |
           az deployment group create \
             --resource-group ${{ env.RESOURCE_GROUP }} \
             --template-file ./deploy/template.json \
-            --parameters location=${{ env.LOCATION }}
+            --parameters location=${{ env.LOCATION }} \
+              mariaSecretName=$(mariaSecretName) privateDNSZoneNameKeyVault=$(privateDNSZoneNameKeyVault)\
+              mariaUserName=$(mariaUserName) subscriptionId=${{ secrets.subscription_id }} \
 
       - name: Azure Logout
         run: az logout
