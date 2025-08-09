@@ -71,6 +71,7 @@ jobs:
             --location 'eastus2' \
             --template-file ./deploy/template.json \
             --parameters subscriptionId=${{ secrets.subscription_id }} \
+            --only-show-errors --output json
 
       - name: Azure Logout
         run: az logout
