@@ -7,7 +7,6 @@ param nameSeparator string
 param resourceGroupName string
 
 param addressSpacePrefix string
-param privateDNSZoneNameKeyVault string
 param logAnalyticsWorkspaceName string 
 param mariaUserName string
 param vmUserNameValue string

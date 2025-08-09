@@ -69,9 +69,7 @@ jobs:
           az deployment group create \
             --resource-group ${{ env.RESOURCE_GROUP }} \
             --template-file ./deploy/template.json \
-            --parameters location=${{ env.LOCATION }} \
-              mariaSecretName=$(mariaSecretName) privateDNSZoneNameKeyVault=$(privateDNSZoneNameKeyVault)\
-              mariaUserName=$(mariaUserName) subscriptionId=${{ secrets.subscription_id }} \
+            --parameters location=${{ env.LOCATION }} subscriptionId=${{ secrets.subscription_id }} \
 
       - name: Azure Logout
         run: az logout

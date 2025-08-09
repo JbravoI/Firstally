@@ -7,15 +7,15 @@ param location string = 'eastus2'
 param customerName string = 'firstally'
 
 param addressSpacePrefix string = '10.1'
-param privateDNSZoneNameKeyVault string
+param privateDNSZoneNameKeyVault string = 'Not Needed'
 param logAnalyticsWorkspaceName string = '${CAFPrefix}${nameSeparator}lga'
-param mariaUserName string
+param mariaUserName string = ''
 param vmUserNameValue string = '${CAFPrefix}${nameSeparator}vm'
 param vmUserName string = '${CAFPrefix}${nameSeparator}vm'
 param administratorLogin string = '${CAFPrefix}${nameSeparator}admin'
 param addressSpace string = '10.1.4.0/22'
 param thirdOctet int = 4
-param mariaSecretName string
+param mariaSecretName string = 'mariaSecretName'
 param vmSecretName string = 'test'
 
 // Configure Customer Prefix
