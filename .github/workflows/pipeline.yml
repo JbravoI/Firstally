@@ -34,7 +34,7 @@ jobs:
         run: |
             pwd
             ls
-            az bicep build --file $(env.TEMPLATE_FILE) --stdout
+            az bicep build --file './firstally_IAC/template.bicep' --stdout
 
 
       # # 4. Deploy Bicep template
