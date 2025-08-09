@@ -42,7 +42,7 @@ jobs:
         run: |
             pwd
             ls
-            az deployment tenant $(secrets.tenant)  --template-file ./firstally_IAC/template.bicep
+            az deployment tenant 'create'  --template-file ./firstally_IAC/template.bicep
 
 
       # 4. Logout from Azure
