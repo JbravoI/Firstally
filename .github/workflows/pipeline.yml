@@ -56,6 +56,9 @@ jobs:
           name: bicep-output
           path: ./deploy
 
+      - name: Upgrade Azure CLI
+        run: az upgrade --yes
+
       - name: Azure Login
         run: |
           az login --service-principal \
