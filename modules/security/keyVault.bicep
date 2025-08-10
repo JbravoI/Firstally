@@ -29,6 +29,12 @@ resource vaults 'Microsoft.KeyVault/vaults@2021-11-01-preview' = {
     }
     enabledForDeployment: true
     tenantId: tenant().tenantId
+    accessPolicies: [
+      {
+        tenantId: tenant().tenantId
+        }
+      }
+    ]
     enabledForDiskEncryption: false
     enabledForTemplateDeployment: true
     enableSoftDelete: true
