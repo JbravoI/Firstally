@@ -4,14 +4,13 @@ param keyVaultName string = '${CAFPrefix}${nameSeparator}kv01'
 param privateDNSZoneNameKeyVault string
 // param coreResourceGroupName string
 // param coreSubscriptionId string
-param mariaUserNameValue string
-param vmUserNameValue string
-@secure()
-param mariaSecretName string
-param vmSecretName string
+// param mariaUserNameValue string
+// param vmUserNameValue string
+// param mariaSecretName string
+// param vmSecretName string
 param nameSeparator string
-param mariaUserName string
-param vmUserName string
+// param mariaUserName string
+// param vmUserName string
 param pepSubnetId string
 param CAFPrefix string
 param location string
