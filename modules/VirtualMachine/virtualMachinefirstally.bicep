@@ -31,6 +31,18 @@ var imageReference = {
   }
 }
 
+// Public IP
+resource publicIp 'Microsoft.Network/publicIPAddresses@2022-05-01' = {
+  name: '${virtualMachineName}-pip'
+  location: location
+  sku: {
+    name: 'Basic' // Or 'Standard'
+  }
+  properties: {
+    publicIPAllocationMethod: 'Dynamic' // or 'Static'
+  }
+}
+
 //Network interface
 resource networkInterface 'Microsoft.Network/networkInterfaces@2022-05-01' = {
   name: networkInterfaceNmae
@@ -41,6 +53,9 @@ resource networkInterface 'Microsoft.Network/networkInterfaces@2022-05-01' = {
         name: 'ipconfig1'
         properties: {
           privateIPAllocationMethod: 'Dynamic'
+          publicIPAddress: {
+            id: publicIp.id
+          }
           subnet: {
             id: vmSubnetId
           }
