@@ -1,0 +1,37 @@
+name: Deploy Bicep Template at Tenant Scope
+
+on:
+  workflow_dispatch: # manual trigger, can also add push or schedule
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    permissions:
+      id-token: write
+      contents: read
+
+    steps:
+      # 1. Checkout your repo
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      # 2. Azure Login with Service Principal
+      - name: Azure Login
+        uses: azure/login@v2
+        with:
+          client-id: ${{ secrets.username }}
+          tenant-id: ${{ secrets.password }}
+          subscription-id: ${{ secrets.subscription_id }}
+          allow-no-subscriptions: true  # required for tenant-scope SPs
+          enable-AzPSSession: true
+
+      # 3. Deploy Bicep at tenant scope
+      - name: Deploy Bicep
+        run: |
+          az deployment tenant create \
+            --name DEPLOYMENT_BICEP \
+            --location eastus2 \
+            --template-file ./firstally_IAC/template.bicep \
+            --parameters subscriptionId=${{ secrets.subscription_id }} \
+            --only-show-errors --output table
