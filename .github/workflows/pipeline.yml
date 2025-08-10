@@ -2,9 +2,9 @@ name: Deploy Bicep to Azure
 
 on:
   workflow_dispatch:
-  push:
-    branches:
-      - main
+  # push:
+  #   branches:
+  #     - main
 
 env:
   RESOURCE_GROUP: my-resource-group
