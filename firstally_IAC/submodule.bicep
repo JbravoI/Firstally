@@ -143,12 +143,6 @@ module keyVault '../modules/security/keyVault.bicep' = {
   params: {
     privateDNSZoneNameKeyVault: privateDNSZoneNameKeyVault
     pepSubnetId: virtualNetwork.outputs.pepSubnetId
-    mariaUserNameValue: administratorLogin
-    vmUserNameValue: vmUserNameValue
-    mariaSecretName: mariaSecretName
-    vmSecretName: vmSecretName
-    mariaUserName: mariaUserName
-    vmUserName: vmUserName
     nameSeparator: nameSeparator
     CAFPrefix: CAFPrefix
     location: location
