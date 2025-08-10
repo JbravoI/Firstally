@@ -15,7 +15,7 @@ param vmSubnetId string
 param nameSeparator string
 
 //VM Parameters
-param vmSizeSet string = 'Standard_DS1_v2' 
+param vmSizeSet string = 'Standard_B1ms' 
 param virtualMachineName string = '${CAFPrefix}${nameSeparator}vm'
 param networkInterfaceNmae string = '${virtualMachineName}${nameSeparator}ni'
 param computervmName string = '${CAFPrefix}${nameSeparator}Server'
