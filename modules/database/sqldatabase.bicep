@@ -15,7 +15,7 @@ var computeSize = 'Basic'
 param maxSizeBytes string = '2147483648' // 2 GB
 
 // SQL Server
-resource sqlServer 'Microsoft.Sql/servers@2022-11-01' = {
+resource sqlServer 'Microsoft.Sql/servers@2022-11-01-preview' = {
   name: sqlServerName
   location: location
   properties: {
@@ -25,7 +25,7 @@ resource sqlServer 'Microsoft.Sql/servers@2022-11-01' = {
 }
 
 // SQL Server Firewall Rule (Allow Azure services to access)
-resource allowAzureServices 'Microsoft.Sql/servers/firewallRules@2022-11-01' = {
+resource allowAzureServices 'Microsoft.Sql/servers/firewallRules@2022-11-01-preview' = {
   parent: sqlServer
   name: 'AllowAzureServices'
   properties: {
@@ -35,7 +35,7 @@ resource allowAzureServices 'Microsoft.Sql/servers/firewallRules@2022-11-01' = {
 }
 
 // SQL Database
-resource sqlDatabase 'Microsoft.Sql/servers/databases@2022-11-01' = {
+resource sqlDatabase 'Microsoft.Sql/servers/databases@2022-11-01-preview' = {
   name: databaserealname
   location: location
   sku: {
