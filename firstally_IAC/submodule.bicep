@@ -176,7 +176,7 @@ module sqldatabase '../modules/database/sqldatabase.bicep' = {
     administratorLogin: administratorLogin
   }
   dependsOn: [
-    generateSecret
+    VirtualMachine
   ]
 }
 
@@ -187,7 +187,7 @@ module VirtualMachine '../modules/VirtualMachine/virtualMachinefirstally.bicep' 
   params: {
     virtualMachineName: vmUserName
     vmUserNameValue: vmUserName
-    vmSubnetId: virtualNetwork.outputs.virtualNetworkId 
+    vmSubnetId: virtualNetwork.outputs.vmSubnetId 
     nameSeparator: nameSeparator
     CAFPrefix: CAFPrefix
     location: location
