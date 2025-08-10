@@ -40,7 +40,7 @@ jobs:
       # 3. Deploy Bicep at tenant scope
       - name: Deploy Bicep
         run: |
-          az deployment tenant create \
+          az deployment sub create \
             --name DEPLOYMENT_BICEP \
             --location eastus2 \
             --template-file ./firstally_IAC/template.bicep \
