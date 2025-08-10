@@ -48,7 +48,7 @@ resource secretsMariaUser 'Microsoft.KeyVault/vaults/secrets@2021-11-01-preview'
   parent: vaults
   name: mariaUserName
   properties: {
-    value: mariaUserNameValue
+    value: 'mariaUserNameVe'
   }
 }
 
@@ -57,24 +57,11 @@ resource secretsvmUser 'Microsoft.KeyVault/vaults/secrets@2021-11-01-preview' = 
   parent: vaults
   name: vmUserName
   properties: {
-    value: vmUserNameValue
+    value: 'vmUserNamee'
   }
 }
 
 
-module generateSecret 'keyVaultGenerateSecret.bicep' = {
-  name: 'mariaSecret'
-  params: {
-    mariaSecretName: mariaSecretName
-    vmSecretName: vmSecretName
-    keyVaultName: keyVaultName
-    location: location
-  }
-  dependsOn: [
-    secretsMariaUser
-    vaults
-  ]
-}
 
 // // Private DNS Zone Groups / Vault Core
 // resource privateDnsZoneGroups 'Microsoft.Network/privateEndpoints/privateDnsZoneGroups@2021-05-01' = {
