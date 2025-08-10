@@ -32,6 +32,9 @@ resource allowAzureServices 'Microsoft.Sql/servers/firewallRules@2022-11-01-prev
     startIpAddress: '0.0.0.0'
     endIpAddress: '0.0.0.0'
   }
+  dependsOn: [
+    sqlServer
+  ]
 }
 
 // SQL Database
@@ -45,4 +48,7 @@ resource sqlDatabase 'Microsoft.Sql/servers/databases@2022-11-01-preview' = {
   properties: {
     maxSizeBytes: maxSizeBytes
   }
+  dependsOn: [
+    sqlServer
+  ]
 }
