@@ -77,7 +77,7 @@ resource virtualMachine 'Microsoft.Compute/virtualMachines@2021-11-01' = {
       ]
     }
     osProfile: {
-      computerName: computervmName
+      computerName: virtualMachineName
       adminUsername: vmUserNameValue
       adminPassword: vmSecretName
     }
