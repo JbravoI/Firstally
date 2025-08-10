@@ -28,55 +28,6 @@ resource vaults 'Microsoft.KeyVault/vaults@2021-11-01-preview' = {
       family: 'A'
       name: 'standard'
     }
-    tenantId: tenant().tenantId
-    accessPolicies: [
-      {
-        tenantId: tenant().tenantId
-        objectId: 'bba1cee1-66b5-49fd-8f45-be029ddcfcb6' // This is the Brado platformAdmin Group in AAD
-        permissions: {
-          keys: [
-            'Get'
-            'List'
-            'Update'
-            'Create'
-            'Import'
-            'Delete'
-            'Recover'
-            'Backup'
-            'Restore'
-            'GetRotationPolicy'
-            'SetRotationPolicy'
-            'Rotate'
-          ]
-          secrets: [
-            'Get'
-            'List'
-            'Set'
-            'Delete'
-            'Recover'
-            'Backup'
-            'Restore'
-          ]
-          certificates: [
-            'Get'
-            'List'
-            'Update'
-            'Create'
-            'Import'
-            'Delete'
-            'Recover'
-            'Backup'
-            'Restore'
-            'ManageContacts'
-            'ManageIssuers'
-            'GetIssuers'
-            'ListIssuers'
-            'SetIssuers'
-            'DeleteIssuers'
-          ]
-        }
-      }
-    ]
     enabledForDeployment: true
     enabledForDiskEncryption: false
     enabledForTemplateDeployment: true
@@ -123,33 +74,6 @@ module generateSecret 'keyVaultGenerateSecret.bicep' = {
     secretsMariaUser
     vaults
   ]
-}
-
-// Create Private Endpoint in Core
-resource privateEndpoints 'Microsoft.Network/privateEndpoints@2021-05-01' = {
-  name: '${keyVaultName}${nameSeparator}pep'
-  location: location
-  tags: tags
-  properties: {
-    privateLinkServiceConnections: [
-      {
-        name: '${keyVaultName}${nameSeparator}pep'
-        properties: {
-          privateLinkServiceId: vaults.id
-          groupIds: [
-            'vault'
-          ]
-        }
-      }
-    ]
-    subnet: {
-      id: pepSubnetId
-    }
-    customNetworkInterfaceName: '${keyVaultName}${nameSeparator}nic'
-    ipConfigurations: []
-    customDnsConfigs: []
-  }
-  dependsOn: []
 }
 
 // // Private DNS Zone Groups / Vault Core
