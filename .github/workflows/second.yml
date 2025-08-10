@@ -21,13 +21,21 @@ jobs:
 
       # 2. Azure Login with Service Principal
       - name: Azure Login
-        uses: azure/login@v2
-        with:
-          client-id: ${{ secrets.username }}
-          tenant-id: ${{ secrets.tenant }}
-          subscription-id: ${{ secrets.subscription_id }}
-          allow-no-subscriptions: true  # required for tenant-scope SPs
-          enable-AzPSSession: true
+        run: |
+          az login --service-principal \
+            --username ${{ secrets.username }} \
+            --password ${{ secrets.password }} \
+            --tenant ${{ secrets.tenant }}
+          az account set --subscription ${{ secrets.subscription_id }}
+          
+      # - name: Azure Login
+      #   uses: azure/login@v2
+      #   with:
+      #     client-id: ${{ secrets.username }}
+      #     tenant-id: ${{ secrets.tenant }}
+      #     subscription-id: ${{ secrets.subscription_id }}
+      #     allow-no-subscriptions: true  # required for tenant-scope SPs
+      #     enable-AzPSSession: true
 
       # 3. Deploy Bicep at tenant scope
       - name: Deploy Bicep
