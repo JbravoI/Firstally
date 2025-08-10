@@ -159,7 +159,7 @@ module generateSecret '../modules/VirtualMachine/keyvaultpassword.bicep' = {
   name: 'Secretgnerator'
   params: {
     location: location
-    keyVaultName: keyVault.name
+    keyVaultName: keyVault.outputs.keyVaultName
     vmSecretName: vmSecretName
   }
 }
