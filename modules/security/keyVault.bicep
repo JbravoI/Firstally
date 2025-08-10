@@ -43,25 +43,6 @@ resource vaults 'Microsoft.KeyVault/vaults@2021-11-01-preview' = {
   }
 }
 
-// Create MariaDb Admin User
-resource secretsMariaUser 'Microsoft.KeyVault/vaults/secrets@2021-11-01-preview' = {
-  parent: vaults
-  name: mariaUserName
-  properties: {
-    value: 'mariaUserNameVe'
-  }
-}
-
-// Create MariaDb Admin User
-resource secretsvmUser 'Microsoft.KeyVault/vaults/secrets@2021-11-01-preview' = {
-  parent: vaults
-  name: vmUserName
-  properties: {
-    value: 'vmUserNamee'
-  }
-}
-
-
 
 // // Private DNS Zone Groups / Vault Core
 // resource privateDnsZoneGroups 'Microsoft.Network/privateEndpoints/privateDnsZoneGroups@2021-05-01' = {
