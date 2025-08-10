@@ -2,6 +2,9 @@ name: Deploy Bicep Template at Tenant Scope
 
 on:
   workflow_dispatch: # manual trigger, can also add push or schedule
+  push:
+    branches:
+      - main
 
 jobs:
   deploy:
@@ -21,7 +24,7 @@ jobs:
         uses: azure/login@v2
         with:
           client-id: ${{ secrets.username }}
-          tenant-id: ${{ secrets.password }}
+          tenant-id: ${{ secrets.tenant }}
           subscription-id: ${{ secrets.subscription_id }}
           allow-no-subscriptions: true  # required for tenant-scope SPs
           enable-AzPSSession: true
