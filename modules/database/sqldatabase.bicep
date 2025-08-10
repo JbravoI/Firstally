@@ -7,7 +7,8 @@ param administratorLoginPassword string
 param administratorLogin string
 
 var sqlServerName = '${CAFPrefix}${nameSeparator}db-servername'
-var databaseName = '${CAFPrefix}${nameSeparator}db'
+var databaseName = '${CAFPrefix}db'
+var databaserealname = '${sqlServerName}/${databaseName}'
 var edition = 'Basic'
 var computeSize = 'Basic'
 
@@ -35,7 +36,7 @@ resource allowAzureServices 'Microsoft.Sql/servers/firewallRules@2022-11-01' = {
 
 // SQL Database
 resource sqlDatabase 'Microsoft.Sql/servers/databases@2022-11-01' = {
-  name: databaseName
+  name: databaserealname
   location: location
   sku: {
     name: computeSize
