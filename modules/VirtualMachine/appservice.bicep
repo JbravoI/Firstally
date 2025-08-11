@@ -6,7 +6,7 @@ param nameSeparator string
 
 param appServicePlanName string = '${CAFPrefix}${nameSeparator}asp'
 param webAppName string =  '${CAFPrefix}${nameSeparator}app221'
-param skuName string = 'F1'
+param skuName string = 'S1'
 param runtimeStack string = 'NODE|18-lts' 
 param osType string = 'windows' 
 
