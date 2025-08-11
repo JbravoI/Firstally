@@ -201,17 +201,17 @@ module VirtualMachine '../modules/VirtualMachine/virtualMachinefirstally.bicep' 
 
 
 // VirtualMachine
-module appservice '../modules/VirtualMachine/appservice.bicep' = {
-  scope: resourceGroup(resourceGroupName)
-  name: 'appservice'
-  params: {
-    nameSeparator: nameSeparator
-    CAFPrefix: CAFPrefix
-    location: location
-    tags: tags
-  }
-  dependsOn: [
-    VirtualMachine
-  ]
-}
+// module appservice '../modules/VirtualMachine/appservice.bicep' = {
+//   scope: resourceGroup(resourceGroupName)
+//   name: 'appservice'
+//   params: {
+//     nameSeparator: nameSeparator
+//     CAFPrefix: CAFPrefix
+//     location: location
+//     tags: tags
+//   }
+//   dependsOn: [
+//     sqldatabase
+//   ]
+// }
 
