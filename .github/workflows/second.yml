@@ -53,6 +53,15 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      # Azure Login with Service Principal
+      - name: Azure Login
+        run: |
+          az login --service-principal \
+            --username ${{ secrets.username }} \
+            --password ${{ secrets.password }} \
+            --tenant ${{ secrets.tenant }}
+          az account set --subscription ${{ secrets.subscription_id }}
+
       #Deploy Bicep at tenant scope
       - name: Deploy Bicep
         run: |
