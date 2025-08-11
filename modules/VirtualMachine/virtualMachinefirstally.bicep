@@ -39,7 +39,7 @@ resource publicIp 'Microsoft.Network/publicIPAddresses@2022-05-01' = {
     name: 'Standard' // Or 'Standard'
   }
   properties: {
-    publicIPAllocationMethod: 'Dynamic' // or 'Static'
+    publicIPAllocationMethod: 'Static' // or 'Static'
   }
 }
 
