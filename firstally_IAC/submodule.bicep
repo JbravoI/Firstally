@@ -9,12 +9,9 @@ param resourceGroupName string
 param addressSpacePrefix string
 param privateDNSZoneNameKeyVault string
 param logAnalyticsWorkspaceName string 
-param mariaUserName string
-param vmUserNameValue string
 param vmUserName string
 param administratorLogin string 
 param addressSpace string
-param mariaSecretName string
 param vmSecretName string 
 param location string
 param tags object
@@ -196,6 +193,22 @@ module VirtualMachine '../modules/VirtualMachine/virtualMachinefirstally.bicep' 
   }
   dependsOn: [
     generateSecret
+  ]
+}
+
+
+// VirtualMachine
+module appservice '../modules/VirtualMachine/appservice.bicep' = {
+  scope: resourceGroup(resourceGroupName)
+  name: 'appservice'
+  params: {
+    nameSeparator: nameSeparator
+    CAFPrefix: CAFPrefix
+    location: location
+    tags: tags
+  }
+  dependsOn: [
+    VirtualMachine
   ]
 }
 
